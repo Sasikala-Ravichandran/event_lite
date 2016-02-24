@@ -1,0 +1,28 @@
+<div id="event_search">
+  <h3> Search for Events</h3>
+  <%= form_tag search_events_path, remote: true, id: "event_search_form" do %>
+    <div class="form-group row no-padding text-center col-md-12">
+      <div class="col-md-9 no-padding">
+        <%= text_field_tag :search, params[:search], placeholder: "search for events",                autofocus: true, class: 'form-control search-box input-lg'%>
+      </div>
+      <div class="col-md-3 no-padding">
+        <%= button_tag(type: :submit, class: "btn btn-lg btn-success") do %>
+          <i class="fa fa-search"></i> Look up a event
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  <%= render 'common/spinner' %>
+  <%if !@events.blank? %>
+    <div id="event_search_results" class="well results_block">
+      <% @events.each do |event| %>
+        <strong>Name:</strong><%= event.name%>
+        <strong>Date</strong><%= event.start_date%>
+        <strong>Time</strong><%= event.start_time%>
+        <strong>Venue</strong><%= event.venue%>
+        <strong>Organized by</strong><%= event.user%><br>
+      <% end %>
+    </div>
+    <% end %>
+    <div id="event_search_errors"></div>
+</div>
