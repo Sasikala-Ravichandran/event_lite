@@ -7,7 +7,7 @@ RSpec.feature "Signing Out" do
     user = build(:user)
     login_as build(:user)
     visit root_path
-    click_link "logout"
+    click_link "Logout"
     expect(page).to have_content("Signed out successfully.")
   
   end

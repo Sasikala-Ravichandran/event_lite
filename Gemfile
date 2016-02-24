@@ -24,6 +24,8 @@ end
 
 group :development do
   gem 'sqlite3'
+  gem 'pry'
+  gem 'pry-nav'
   gem 'web-console', '~> 2.0'
 end
 
