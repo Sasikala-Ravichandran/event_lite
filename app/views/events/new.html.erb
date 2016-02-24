@@ -1,18 +1,2 @@
 <h1> New page of the event</h1>
-
-<%= form_for(@event) do |f| %>
-
-  <%=f.label :name %>
-  <%=f.text_field :name %>
-
-  <%=f.label :start_date %>
-  <%=f.date_field :start_date %>
-
-  <%=f.label :start_time %>
-  <%=f.time_field :start_time %>
-
-  <%=f.label :venue %>
-  <%=f.text_area :venue %>
-
-  <%=f.submit%>
-<% end %>
+<%= render 'form' %>

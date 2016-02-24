@@ -5,7 +5,7 @@ class EventsController < ApplicationController
   before_action :require_creator, only: [:edit, :update, :destroy]
   
   def index
-    
+    @events = Event.all
   end
 
   def show

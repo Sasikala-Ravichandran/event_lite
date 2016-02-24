@@ -1,1 +1,8 @@
-<h1>Index page of the Event</h1>
+<h1>All Events</h1>
+<% @events.each do |event| %>
+  <p><%= event.venue %></p>
+  <% if current_user == event.user %>
+    <%= link_to "Edit", '#' %>
+    <%= link_to "Delete", '#' %>
+  <% end %>
+<% end%>
