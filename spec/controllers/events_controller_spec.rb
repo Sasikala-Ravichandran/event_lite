@@ -2,11 +2,11 @@ require 'rails_helper'
 require 'pry'
 RSpec.describe EventsController, type: :controller do
   
-  let(:user) { create(:user) }
-  let(:event) { create(:event, name: "Tech Event", user_id: user) }
+  let(:creator) { create(:creator) }
+  let(:event) { create(:event, name: "Tech Event", creator_id: creator.id) }
 
   before :each do
-    login_with(user)
+    login_with(creator)
   end
 
   describe "GET #index" do
@@ -33,7 +33,7 @@ RSpec.describe EventsController, type: :controller do
   describe "POST #create" do
 
     context "a successful create" do
-      before { post :create, event: FactoryGirl.attributes_for(:event, user_id: user) }
+      before { post :create, event: FactoryGirl.attributes_for(:event, creator_id: creator.id) }
       it "saves an event object in database" do
         expect(Event.count).to eq(1)
       end
@@ -50,7 +50,7 @@ RSpec.describe EventsController, type: :controller do
 
     context "an unsuccessful create" do
 
-      before { post :create, event: FactoryGirl.attributes_for(:event, name: " ", user_id: user) }
+      before { post :create, event: FactoryGirl.attributes_for(:event, name: " ", creator_id: creator) }
       it "does not save an event object in database" do
         expect(Event.count).to eq(0)
       end

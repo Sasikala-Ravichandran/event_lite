@@ -1,7 +1,7 @@
 <h1>All Events</h1>
 <% @events.each do |event| %>
   <p><%= event.venue %></p>
-  <% if current_user == event.user %>
+  <% if current_user == event.creator %>
     <%= link_to "Edit", '#' %>
     <%= link_to "Delete", '#' %>
   <% end %>

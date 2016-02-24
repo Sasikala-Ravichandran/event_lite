@@ -41,4 +41,13 @@ RSpec.describe Event, type: :model do
     expect(event.errors[:name]).to eq(["is too short (minimum is 5 characters)"])
   end
 
+  it "requires creator" do
+    event.creator_id = " "
+    expect(event).not_to be_valid
+    expect(event.errors[:creator_id]).to eq(["can't be blank"])
+  end
+
+  it { should belong_to(:creator) }
+  it { should have_many(:attendance) }
+  it { should have_many(:users).through(:attendance) }
 end 

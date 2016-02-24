@@ -12,11 +12,11 @@ class EventsController < ApplicationController
   end
 
   def new
-    @event = current_user.events.build
+    @event = current_user.created_events.build
   end
 
   def create
-    @event = current_user.events.build(event_params)
+    @event = current_user.created_events.build(event_params)
     if @event.save
       flash[:success] = "Event has been created"
       redirect_to @event
@@ -66,7 +66,7 @@ class EventsController < ApplicationController
   end
 
   def require_creator
-    if current_user != @event.user
+    if current_user != @event.creator
       flash[:danger] = "You are not allowed to do this"
       redirect_to root_path
     end

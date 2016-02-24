@@ -4,5 +4,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :events
+  has_many :created_events, class_name: "Event", foreign_key: "creator_id",
+                                                 dependent: :destroy
+
+  has_many :attendance, dependent: :destroy
+  has_many :events, through: :attendance
 end

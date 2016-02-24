@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.feature "Editing an event" do
 
-  let(:john) { create(:user) }
+  let(:john) { create(:creator) }
   let(:maxy) { create(:user) }
-  let(:event) { create(:event, user_id: john.id) }
+  let(:event) { create(:event, creator_id: john.id) }
 
   scenario "with an user who created the event" do
     login_as(john)

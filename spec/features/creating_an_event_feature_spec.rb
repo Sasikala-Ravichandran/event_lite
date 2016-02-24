@@ -3,10 +3,10 @@ require 'rails_helper'
 RSpec.feature "Creating an event" do
 
   scenario do
-    user = create(:user)
+    creator = create(:creator)
     event = build(:event)
     
-    login_as(user)
+    login_as(creator)
 
     visit new_event_path
 

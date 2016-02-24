@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature "Lisiting events" do
 
-  let(:user) { create(:user) }
+  let(:creator) { create(:creator) }
   let(:event_1) { create(:event) }
   let(:event_2) { create(:event) }
 
@@ -13,7 +13,7 @@ RSpec.feature "Lisiting events" do
   end
 
   scenario "with logged in user" do
-    login_as(user)
+    login_as(creator)
     visit events_path
     expect(page).to have_content("All Events")
     expect(current_path).to eq(events_path)

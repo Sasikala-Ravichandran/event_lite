@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.feature "Showing an event" do
 
-  let(:user) { create(:user) }
-  let(:event) { create(:event, user_id: user.id) }
+  let(:creator) { create(:creator) }
+  let(:event) { create(:event, creator_id: creator.id) }
 
   scenario "with non logged in user" do
     visit event_path(event)
@@ -12,7 +12,7 @@ RSpec.feature "Showing an event" do
   end
 
   scenario "with logged in user" do
-    login_as(user)
+    login_as(creator)
     visit event_path(event)
     expect(page).to have_content(event.name)
     expect(page).to have_content(event.venue)
@@ -20,7 +20,7 @@ RSpec.feature "Showing an event" do
   end
 
   scenario "with user who created events" do
-    login_as(user)
+    login_as(creator)
     visit event_path(event)
     expect(page).to have_content(event.name)
     expect(page).to have_content(event.venue)
