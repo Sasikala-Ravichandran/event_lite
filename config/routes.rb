@@ -6,7 +6,11 @@ Rails.application.routes.draw do
       post 'search'
     end
   end 
-  resources :attendances, except: [:show, :edit, :update]
+  resources :attendances, only: [:create, :destroy] do
+    member do
+      post 'accept'
+    end
+  end
   
   root 'welcome#index'
 end
