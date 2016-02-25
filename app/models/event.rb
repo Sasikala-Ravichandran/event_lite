@@ -5,8 +5,8 @@ class Event < ActiveRecord::Base
   
   belongs_to :creator, class_name: "User"
 
-  has_many :attendance, dependent: :destroy
-  has_many :users, through: :attendance
+  has_many :attendances, dependent: :destroy
+  has_many :users, through: :attendances
 
   def self.search_events(name)
     where("name LIKE ?", "%#{name}%")

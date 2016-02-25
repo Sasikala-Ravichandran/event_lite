@@ -48,6 +48,6 @@ RSpec.describe Event, type: :model do
   end
 
   it { should belong_to(:creator) }
-  it { should have_many(:attendance) }
-  it { should have_many(:users).through(:attendance) }
+  it { should have_many(:attendances) }
+  it { should have_many(:users).through(:attendances) }
 end 
