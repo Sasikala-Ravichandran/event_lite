@@ -14,7 +14,7 @@ RSpec.describe AttendancesController, type: :controller do
 
     context "a successful create" do
       before do
-        post :create, attendance: FactoryGirl.attributes_for(:attendance, user_id: user.id, event_id: event.id)
+        post :create, { user: user.id, event: event.id }
       end
       it "saves an attendance object in database" do
         expect(Attendance.count).to eq(1)       

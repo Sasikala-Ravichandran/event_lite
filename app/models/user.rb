@@ -9,4 +9,6 @@ class User < ActiveRecord::Base
 
   has_many :attendances, dependent: :destroy
   has_many :events, through: :attendances
+
+
 end
