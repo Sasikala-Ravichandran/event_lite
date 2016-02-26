@@ -10,6 +10,11 @@ class User < ActiveRecord::Base
   has_many :attendances, dependent: :destroy
   has_many :events, through: :attendances
 
+  def full_name
+    return "#{first_name} #{last_name}".strip if (first_name || last_name)
+    "Anonymous"
+  end
+
   def attend
     self.attendances.where("accepted = ?", true)
   end

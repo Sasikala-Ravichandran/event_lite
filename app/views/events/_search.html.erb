@@ -1,12 +1,11 @@
 <div id="event_search">
-  <h3> Search for Events</h3>
   <%= form_tag search_events_path, remote: true, id: "event_search_form" do %>
-    <div class="form-group row no-padding text-center col-md-12">
-      <div class="col-md-9 no-padding">
-        <%= text_field_tag :search, params[:search], placeholder: "search for events",                autofocus: true, class: 'form-control search-box input-lg'%>
+    <div class="form-group row no-padding text_center col-md-12">
+      <div class="col-md-offset-2 col-md-6 no-padding">
+        <%= text_field_tag :search, params[:search], placeholder: "search for events",                class: 'form-control search-box input-lg'%>
       </div>
-      <div class="col-md-3 no-padding">
-        <%= button_tag(type: :submit, class: "btn btn-lg btn-success") do %>
+      <div class="col-md-2 no-padding">
+        <%= button_tag(type: :submit, class: "btn btn-lg btn-info") do %>
           <i class="fa fa-search"></i> Look up a event
         <% end %>
       </div>
@@ -14,23 +13,26 @@
   <% end %>
   <%= render 'common/spinner' %>
   <%if !@events.blank? %>
-    <div id="event_search_results" class="well results_block">
+    <div id="event_search_results" class="well row results_block">
       <% @events.each do |event| %>
-        <strong>Name: </strong><%= event.name%>
-        <strong>Date: </strong><%= event.start_date%>
-        <strong>Time: </strong><%= event.start_time%>
-        <div>
-        <% unless current_user == event.creator %>
-          <% if Attendance.not_yet_invited(current_user, event) %>
-            <%= link_to "Attend", attendances_path(user: current_user, event: event), method: :post, class: 'btn btn-info' %>
-          <% elsif Attendance.invited_but_not_accepted(current_user, event) %>
-            <%= link_to "Accept", accept_attendance_path(id: Attendance.find_by_user_event(current_user, event)), method: :post, class: 'btn btn-info' %>
+        <div class="col-md-8 margin_bottom">
+          <strong>Name: </strong><%= event.name%>
+          <strong>Date: </strong><%= event.start_date.strftime("%d %b %Y") %>
+          <strong>Time: </strong><%= event.start_time.strftime("%I:%M %p") %>
+        </div>
+        <div class="col-md-4 margin_bottom">
+          <% unless current_user == event.creator %>
+            <% if Attendance.not_yet_invited(current_user, event) %>
+              <%= link_to "Attend", attendances_path(user: current_user, event: event), method: :post, class: 'btn btn-info' %>
+            <% elsif Attendance.invited_but_not_accepted(current_user, event) %>
+              <%= link_to "Accept", accept_attendance_path(id: Attendance.find_by_user_event(current_user, event)), method: :post, class: 'btn btn-info' %>
+            <% end %>
           <% end %>
-        <% end %>
-        <%= link_to "View", event, class: 'btn btn-info'%>
+          <%= link_to "View", event, class: 'btn btn-info'%>
         </div>
       <% end %>
     </div>
     <% end %>
     <div id="event_search_errors"></div>
 </div>
+<br>

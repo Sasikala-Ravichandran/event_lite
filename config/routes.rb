@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
-  devise_for :users
+  
+  devise_for :users, controllers: { registrations: "user/registrations" }
+
   resources :users, only: [:show]
   resources :events do
     collection do
       post 'search'
     end
   end 
+  
   resources :attendances, only: [:create, :destroy] do
     member do
       post 'accept'

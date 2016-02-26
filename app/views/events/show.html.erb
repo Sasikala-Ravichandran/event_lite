@@ -9,27 +9,27 @@
 <% collection_attending = @event.attending_events %>
 <% collection_inviting = @event.inviting_events %>
 
-<div class="well">
+<div class="well" align="center">
   <p><strong> Date: </strong><%= @event.start_date.strftime("%d %b %Y") %></p>
   <p><strong> Time: </strong><%= @event.start_time.strftime("%I:%M %p") %></p>
   <p><strong> Venue: </strong><%= @event.venue %></p>
-  
-  <% unless collection_inviting.empty? %>
+  <p><strong> Host: </strong><%= @event.creator.full_name %></p>
+  <% unless collection_attending.empty? %>
     <div>
-      <strong> Attending Guests: </strong>
+      <strong> Attending Guests </strong>
       <% collection_attending.each do |attendance| %>
         <% user = attendance.user %>
-        <p><%= user.email %></p>
+        <p><%= current_user == user ? "You" : user.full_name %></p>
       <% end %>
     </div>
   <% end %>
   
   <% unless collection_inviting.empty? %>
     <div>
-      <strong> Invited Guests: </strong>
+      <strong> Invited Guests </strong>
       <% collection_inviting.each do |attendance| %>
         <% user = attendance.user %>
-        <p><%= user.email %></p>
+        <p><%= current_user == user ? "You" : user.full_name %></p>
       <% end %>
   </div>
   <% end %>

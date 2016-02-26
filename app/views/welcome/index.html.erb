@@ -1,6 +1,13 @@
-<h1>Welcome to Event lite app</h1>
-<% if user_signed_in? %>
-  <%= link_to "Logout", destroy_user_session_path, method: :delete %>
-<% else %>
-  <%= link_to "Login", new_user_session_path %>
-<% end %>
+<div class="col-md-12" align="center">
+  <div class="center jumbotron">
+    <h2>Welcome to EVENT LITE</h2>
+    <h4>for the meeting friends and families on special occasions</h4>
+    <% if user_signed_in? %>
+      <%= link_to "Signout", destroy_user_session_path, method: :delete %>
+    <% else %>
+    <%= link_to "Sign up now!", new_user_registration_path, class: "btn btn-lg btn-info" %>
+    <% end %>
+  </div>
+</div>
+
+ 

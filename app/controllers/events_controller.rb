@@ -46,17 +46,19 @@ class EventsController < ApplicationController
   end
 
   def search
-    @events = Event.search_events(params[:search])
-    if @events.blank?
-      render status: :not_found, nothing: true #sending 404
-    else
-      #render json: @events.first
-      render partial: 'search'
+    unless params[:search].blank?
+      @events = Event.search_events(params[:search])
+      if @events.blank?
+        render status: :not_found, nothing: true #sending 404
+      else
+        #render json: @events.first
+        render partial: 'search'
+      end
     end
-
   end
 
   private
+  
   def event_params
     params.require(:event).permit(:name, :start_date, :start_time, :venue)
   end

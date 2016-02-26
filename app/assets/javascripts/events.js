@@ -21,7 +21,7 @@ init_event_search = function(){
     hide_spinner();
     $('#search').val("");
     $("#event_search_results").replaceWith(' ');
-    $("#event_search_errors").replaceWith('Events was not found.').addClass("well");
+    $("#event_search_errors").addClass("well").replaceWith('Events was not found.');
   });
 }
 
