@@ -15,7 +15,10 @@ RSpec.feature "Lisiting events" do
   scenario "with logged in user" do
     login_as(creator)
     visit events_path
-    expect(page).to have_content("All Events")
+    expect(page).to have_content("HOSTING EVENTS")
+    expect(page).to have_content("ATTENDING EVENTS")
+    expect(page).to have_content("ATTENDED EVENTS")
+    expect(page).to have_content("INVITED EVENTS")
     expect(current_path).to eq(events_path)
   end
 end

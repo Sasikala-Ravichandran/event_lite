@@ -1,8 +1,65 @@
-<h1>All Events</h1>
-<% @events.each do |event| %>
-  <p><%= event.venue %></p>
-  <% if current_user == event.creator %>
-    <%= link_to "Edit", '#' %>
-    <%= link_to "Delete", '#' %>
+<div class=" well" align="center">
+<h3>HOSTING EVENTS</h3>
+<hr>
+<%= render current_user.created_events %>
+</div>
+
+<% collection_attend = current_user.attend %>
+<% collection_invited = current_user.invited %>
+
+<div class="row">
+  <div class="well left" align="center">  
+  <h3>ATTENDING EVENTS</h3>
+  <hr>
+  <% collection_attend.each do |attendance| %>
+    <% event = attendance.event %>
+    <% if event.upcoming %>
+    <div class="row margin_bottom">
+      <div class="col-md-6">
+        <%= link_to event.name, event %>
+      </div>
+      <div class="col-md-4">
+        <%= link_to "View", event, class: 'btn btn-info'%>
+      </div>
+    </div>
+    <% end %>
   <% end %>
-<% end%>
+  </div>
+
+  <div class="well left" align="center">  
+  <h3>ATTENDED EVENTS</h3>
+  <hr>
+  <% collection_attend.each do |attendance| %>
+    <% event = attendance.event %>
+    <% unless event.upcoming %>
+    <div class="row margin_bottom">
+      <div class="col-md-6">
+        <%= link_to event.name, event %>
+      </div>
+      <div class="col-md-4">
+        <%= link_to "View", event, class: 'btn btn-info'%>
+      </div>
+    </div>
+    <% end %>
+  <% end %>
+  </div>
+
+  <div class="well left" align="center">  
+  <h3>INVITED EVENTS</h3>
+  <hr>
+  <% collection_invited.each do |attendance| %>
+    <% event = attendance.event %>
+    <% if event.upcoming %>
+    <div class="row margin_bottom">
+      <div class="col-md-4">
+        <%= link_to event.name, event %>
+      </div>
+      <div class="col-md-8">
+        <%= link_to "Accept", accept_attendance_path(id: Attendance.find_by_user_event(current_user, event)), method: :post, class: 'btn btn-info' %>
+        <%= link_to "View", event, class: 'btn btn-info'%>
+      </div>
+    </div>
+    <% end %>
+  <% end %>
+  </div>
+</div>

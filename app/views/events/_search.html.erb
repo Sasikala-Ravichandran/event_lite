@@ -20,10 +20,12 @@
         <strong>Date: </strong><%= event.start_date%>
         <strong>Time: </strong><%= event.start_time%>
         <div>
-        <% if Attendance.not_yet_invited(current_user, event) %>
+        <% unless current_user == event.creator %>
+          <% if Attendance.not_yet_invited(current_user, event) %>
             <%= link_to "Attend", attendances_path(user: current_user, event: event), method: :post, class: 'btn btn-info' %>
-        <% elsif Attendance.invited_but_not_accepted(current_user, event) %>
+          <% elsif Attendance.invited_but_not_accepted(current_user, event) %>
             <%= link_to "Accept", accept_attendance_path(id: Attendance.find_by_user_event(current_user, event)), method: :post, class: 'btn btn-info' %>
+          <% end %>
         <% end %>
         <%= link_to "View", event, class: 'btn btn-info'%>
         </div>

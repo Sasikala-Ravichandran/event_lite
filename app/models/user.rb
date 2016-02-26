@@ -10,5 +10,12 @@ class User < ActiveRecord::Base
   has_many :attendances, dependent: :destroy
   has_many :events, through: :attendances
 
+  def attend
+    self.attendances.where("accepted = ?", true)
+  end
+
+  def invited
+    self.attendances.where("accepted = ?", false)
+  end
 
 end

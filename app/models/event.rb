@@ -11,4 +11,9 @@ class Event < ActiveRecord::Base
   def self.search_events(name)
     where("name LIKE ?", "%#{name}%")
   end
+
+  def upcoming
+    start_date >= Date.today ? true : false
+  end
+  
 end
