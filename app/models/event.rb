@@ -16,4 +16,11 @@ class Event < ActiveRecord::Base
     start_date >= Date.today ? true : false
   end
   
+  def attending_events
+    self.attendances.where("accepted = ?", true)
+  end
+
+  def inviting_events
+    self.attendances.where("accepted = ?", false)
+  end
 end

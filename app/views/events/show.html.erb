@@ -1,7 +1,36 @@
-<h1>Show page of Events</h1>
-<p><%= @event.name %></p>
-<p><%= @event.venue %></p>
-<% if current_user == @event.creator %>
-  <%= link_to "Edit", edit_event_path(@event) %>
-  <%= link_to "Delete", event_path(@event), method: :delete %>
-<% end %>
+<div align="center" class="margin_bottom">
+  <h1><%= @event.name %></h1>
+  <% if current_user == @event.creator %>
+    <%= link_to "Edit", edit_event_path(@event), class: 'btn btn-info' %>
+    <%= link_to "Delete", event_path(@event), method: :delete, data: { confirm: "Are you sure?"}, class: 'btn btn-info' %>
+  <% end %>
+</div>
+
+<% collection_attending = @event.attending_events %>
+<% collection_inviting = @event.inviting_events %>
+
+<div class="well">
+  <p><strong> Date: </strong><%= @event.start_date %></p>
+  <p><strong> Time: </strong><%= @event.start_time %></p>
+  <p><strong> Venue: </strong><%= @event.venue %></p>
+  
+  <% unless collection_inviting.empty? %>
+    <div>
+      <strong> Attending Guests: </strong>
+      <% collection_attending.each do |attendance| %>
+        <% user = attendance.user %>
+        <p><%= user.email %></p>
+      <% end %>
+    </div>
+  <% end %>
+  
+  <% unless collection_inviting.empty? %>
+    <div>
+      <strong> Invited Guests: </strong>
+      <% collection_inviting.each do |attendance| %>
+        <% user = attendance.user %>
+        <p><%= user.email %></p>
+      <% end %>
+    </div>
+  <% end %>
+</div>
