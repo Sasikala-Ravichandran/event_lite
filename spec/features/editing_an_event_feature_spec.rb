@@ -9,10 +9,10 @@ RSpec.feature "Editing an event" do
   scenario "with an user who created the event" do
     login_as(john)
     visit edit_event_path(event)
-    fill_in "Name", with: "#{event.name} edited"
-    fill_in "Start date", with: event.start_date
-    fill_in "Start time", with: event.start_time
-    fill_in "Venue", with: event.venue
+    fill_in "NAME:", with: "#{event.name} edited"
+    fill_in "DATE:", with: event.start_date
+    fill_in "TIME:", with: event.start_time
+    fill_in "VENUE:", with: event.venue
     click_button "Update Event"
     expect(page).to have_content("Event has been updated")
   end

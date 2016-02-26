@@ -10,10 +10,10 @@ RSpec.feature "Creating an event" do
 
     visit new_event_path
 
-    fill_in "Name", with: event.name
-    fill_in "Start date", with: event.start_date
-    fill_in "Start time", with: event.start_time
-    fill_in "Venue", with: event.venue
+    fill_in "NAME:", with: event.name
+    fill_in "DATE:", with: event.start_date
+    fill_in "TIME:", with: event.start_time
+    fill_in "VENUE:", with: event.venue
 
     click_button "Create Event"
 
