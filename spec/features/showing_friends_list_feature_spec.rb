@@ -16,7 +16,6 @@ RSpec.describe "Showing friends" do
     user_friend_1 = user.friends.first
     user_friend_2 = user.friends.second
     expect(page).to have_content("My Friends")
-    print page.html
     expect(page).to have_content(user_friend_1.full_name)
     expect(page).to have_content(user_friend_2.full_name)
   end
