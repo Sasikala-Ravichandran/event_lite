@@ -63,7 +63,7 @@ RSpec.describe AttendancesController, type: :controller do
     end
 
     it "redirects to event show page" do
-      expect(response).to redirect_to user
+      expect(response).to redirect_to events_path
     end
 
   end
@@ -79,7 +79,7 @@ RSpec.describe AttendancesController, type: :controller do
     end
 
     it "redirects to event show page" do
-      expect(response).to redirect_to user
+      expect(response).to redirect_to events_path
     end
   end
 end

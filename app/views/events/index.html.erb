@@ -10,22 +10,10 @@
   <% end %>
 </div>
 
-<div class="row well" align="center"> 
-  <h3>HOSTED EVENTS</h3>
-  <hr>
-  <% if current_user.created_events.size > 0 %>
-    <%= render current_user.created_events.past %>
-  <% else %>
-    <div class='row col-md-10 col-md-offset-1'>
-      <p class="lead">You had not hosted any event. That's alright. Please do host some events in the future and have fun!</p>
-    </div>
-  <% end %>
-</div>
-
 <% collection_attend = current_user.attend %>
 <% collection_invited = current_user.invited %>
 
-<div class=" row well" align="center">  
+<div class="row well" align="center" id="attending_list">  
   <h3>ATTENDING EVENTS</h3>
   <hr>
   <% if collection_attend.size > 0 %>
@@ -37,6 +25,8 @@
             <%= link_to event.name, event %>
           </div>
           <div class="col-md-4">
+            <%= link_to "Decline", attendance_path(attendance), method: :delete,
+                                 data: { confirm: "Don't want to attend this event?"},class: 'btn btn-info' %>
             <%= link_to "View", event, class: 'btn btn-info'%>
           </div>
         </div>
@@ -47,6 +37,18 @@
       <p class="lead">You are not attending any event yet and missing fun. Please do join some events and enjoy with your friends and family!</p>
     </div>
   <%end%>
+</div>
+
+<div class="row well" align="center"> 
+  <h3>HOSTED EVENTS</h3>
+  <hr>
+  <% if current_user.created_events.size > 0 %>
+    <%= render current_user.created_events.past %>
+  <% else %>
+    <div class='row col-md-10 col-md-offset-1'>
+      <p class="lead">You had not hosted any event. That's alright. Please do host some events in the future and have fun!</p>
+    </div>
+  <% end %>
 </div>
 
 <div class="row">
@@ -77,7 +79,7 @@
   <div class="well left" align="center">  
     <h3>INVITED EVENTS</h3>
     <hr>
-    <% if collection_attend.size > 0 %>
+    <% if collection_invited.size > 0 %>
       <% collection_invited.each do |attendance| %>
         <% event = attendance.event %>
         <% if event.upcoming %>
@@ -87,6 +89,8 @@
             </div>
             <div class="col-md-8">
               <%= link_to "Accept", accept_attendance_path(id: Attendance.find_by_user_event(current_user, event)), method: :post, class: 'btn btn-info' %>
+              <%= link_to "Decline", attendance_path(attendance), method: :delete,
+                                 data: { confirm: "Don't want to attend this event?"},class: 'btn btn-info' %>
               <%= link_to "View", event, class: 'btn btn-info'%>
             </div>
           </div>

@@ -17,7 +17,7 @@ class AttendancesController < ApplicationController
     @attendance = Attendance.find(params[:id])
     @attendance.destroy
     flash[:success] = "You are not attending the event"
-    redirect_to current_user
+    redirect_to events_path
   end
 
   def accept
@@ -29,7 +29,7 @@ class AttendancesController < ApplicationController
     else
       flash[:success] = "You are already attending the event"
     end
-    redirect_to current_user
+    redirect_to events_path
   end
 
 end

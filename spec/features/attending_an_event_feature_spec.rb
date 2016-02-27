@@ -11,7 +11,7 @@ RSpec.describe "Attending an event" do
     click_link "My Page"
   end  
 
-  scenario "user searches for event which already accepted invitation" do
+  scenario "user searches for an event which he has been accepted invitation" do
     visit_my_page
     user_event = user.events.first
     fill_in "search", with: user_event.name
@@ -22,7 +22,7 @@ RSpec.describe "Attending an event" do
     expect(page).not_to have_link("Attend")
   end
 
-  scenario "user searches for event for which has not accepted invitation" do
+  scenario "user searches for an event which he wants to attend" do
     visit_my_page
     fill_in "search", with: "who"
     click_button "Look up a event"
