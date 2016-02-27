@@ -7,6 +7,8 @@ RSpec.describe User, type: :model do
   it { should have_many(:events).through(:attendances) }
   it { should have_many(:friendships) }
   it { should have_many(:friends).through(:friendships) }
+  it { should have_many(:rev_friendships) }
+  it { should have_many(:rev_friends).through(:rev_friendships) }
 
   describe "#full_name" do
     it "returns the concatenated first and last name" do

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Accepting an event" do
+RSpec.describe "Accepting and Declining an event Invitation" do
 
   let!(:user_1) { create(:user_with_attending_events, count: 3) }
   let!(:user_2) { create(:user_with_attending_events, count: 3) }

@@ -1,4 +1,4 @@
-<% if @friendships.size > 0 %>
+<% if current_user.friendships.size > 0 || current_user.rev_friendships.size > 0 %>
   <table class="table table-striped">
     <thead>
       <tr>
@@ -11,22 +11,70 @@
       </tr>
     </thead>
     <tbody>
-      <% @friendships.each do |friend| %>
+      
+      <% current_user.friendships.each do |friendship| %>
+        <% if friendship.verified %>
+        <% friend = friendship.friend %>
         <tr>
           <td><%= friend.full_name %></td>
           <td><%= friend.email %></td>
           <td>
-            <%= link_to "View Profile", user_path(friend), class: "btn btn-info" %>
-            <%= link_to "Remove Friend", friendship_path(friend), :method => :delete, 
-                                  :data => { :confirm => 'Are you sure?' },
-                                  :class => 'btn btn-danger' %>
+            <%= link_to "View", user_path(friend), class: "btn btn-info" %>
+             
           </td>
         </tr>
+        <% end %>
       <% end %>
+
+      <% current_user.rev_friendships.each do |friendship| %>
+        <% if friendship.verified %>
+        <% user = friendship.user %>
+        <tr>
+          <td><%= user.full_name %></td>
+          <td><%= user.email %></td>
+          <td>
+            <%= link_to "View", user_path(user), class: "btn btn-info" %>
+          </td>
+        </tr>
+        <% end %>
+      <% end %>
+
+      <% current_user.friendships.each do |friendship| %>
+        <% if !friendship.verified %>
+        <% friend = friendship.friend %>
+        <tr>
+          <td><%= friend.full_name %></td>
+          <td><%= friend.email %></td>
+          <td>
+            <%= link_to "View", user_path(friend), class: "btn btn-info" %>
+            <p class="btn btn-warning"> Friend Request Sent</p>
+          </td>
+        </tr>
+        <% end %>
+      <% end %>
+
+      <% current_user.rev_friendships.each do |friendship| %>
+        <% if !friendship.verified %>
+        <% user = friendship.user %>
+        <tr>
+          <td><%= user.full_name %></td>
+          <td><%= user.email %></td>
+          <td>
+            <%= link_to "View", user_path(user), class: "btn btn-info" %>
+            <%= link_to "Accept", accept_friendship_path(id: friendship),
+                                         method: :post,class: 'btn btn-success'%>
+            <%= link_to "Decline", friendship_path(friendship), method: :delete,
+                                    data: { confirm: "Are you sure?" },
+                                    class: 'btn btn-danger' %>
+          </td>
+        </tr>
+        <% end %>
+      <% end %>
+
     </tbody>
   </table>
 <% else %>
   <div class='well row col-md-12'>
-    <p class="lead">You don't have any friends yet. Please add some!</p>
+    <p class="leading">You don't have any friends yet. Please add some!</p>
   </div>
 <% end %>

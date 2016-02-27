@@ -2,7 +2,7 @@
   <h1><%= @event.name %></h1>
   <% if current_user == @event.creator %>
     <%= link_to "Edit", edit_event_path(@event), class: 'btn btn-info' %>
-    <%= link_to "Delete", event_path(@event), method: :delete, data: { confirm: "Are you sure?"}, class: 'btn btn-info' %>
+    <%= link_to "Delete", event_path(@event), method: :delete, data: { confirm: "Are you sure?"}, class: 'btn btn-danger' %>
   <% end %>
 </div>
 

@@ -9,7 +9,7 @@ class FriendshipsController < ApplicationController
     else
       flash[:danger] = "You are not allowed to make a friend"
     end
-    redirect_to current_user
+    redirect_to friendship_path(current_user)
   end
 
   def accept
@@ -21,18 +21,17 @@ class FriendshipsController < ApplicationController
     else
       flash[:danger] = "You rejected the request"
     end
-    redirect_to current_user
+    redirect_to friendship_path(current_user)
   end
 
   def destroy
     @friendship = Friendship.find(params[:id])
     @friendship.destroy
     flash[:success] = "You rejected the request"
-    redirect_to current_user
+    redirect_to friendship_path(current_user)
   end
 
   def show
-    @friendships = current_user.friends
   end
 
 end

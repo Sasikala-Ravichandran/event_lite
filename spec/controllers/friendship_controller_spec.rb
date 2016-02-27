@@ -26,7 +26,7 @@ RSpec.describe FriendshipsController, type: :controller do
       end
 
       it "redirects_to profile page" do
-        expect(response).to redirect_to(user_path(user))
+        expect(response).to redirect_to(friendship_path(user))
       end
 
     end
@@ -44,7 +44,7 @@ RSpec.describe FriendshipsController, type: :controller do
       end
 
       it "redirects_to profile page" do
-        expect(response).to redirect_to(user_path(user))
+        expect(response).to redirect_to(friendship_path(user))
       end
     end
   end
@@ -60,7 +60,7 @@ RSpec.describe FriendshipsController, type: :controller do
     end
 
     it "redirects to event show page" do
-      expect(response).to redirect_to user
+      expect(response).to redirect_to(friendship_path(user))
     end
   end
 
@@ -85,7 +85,7 @@ RSpec.describe FriendshipsController, type: :controller do
     end
 
     it "redirects to event show page" do
-      expect(response).to redirect_to user
+      expect(response).to redirect_to(friendship_path(user))
     end
   end
 end

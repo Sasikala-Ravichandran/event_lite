@@ -13,6 +13,9 @@ class User < ActiveRecord::Base
   has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships, source: :friend
 
+  has_many :rev_friendships, class_name: "Friendship", foreign_key: "friend_id"
+  has_many :rev_friends, through: :rev_friendships, source: :user
+
   def full_name
     return "#{first_name} #{last_name}".strip if (first_name || last_name)
     "Anonymous"
