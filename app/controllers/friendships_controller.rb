@@ -32,7 +32,7 @@ class FriendshipsController < ApplicationController
   end
 
   def show
-    @friendship = Friendship.find(params[:id])
+    @friendships = current_user.friends
   end
 
 end

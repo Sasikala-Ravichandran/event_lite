@@ -11,7 +11,7 @@
         <ul class="nav navbar-nav">
           <li><%= link_to "My Page", user_path(current_user) %></li>
           <li><%= link_to "My Events", events_path  %></li> 
-          <li><%= link_to "My Friends", '#'  %></li> 
+          <li><%= link_to "My Friends", friendship_path(current_user)  %></li> 
           <li><%= link_to "Create a Event", new_event_path  %></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
