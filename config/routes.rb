@@ -14,6 +14,12 @@ Rails.application.routes.draw do
       post 'accept'
     end
   end
+
+  resources :friendships, only: [:show, :create, :destroy] do
+    member do
+      post 'accept'
+    end
+  end
   
   root 'welcome#index'
 end

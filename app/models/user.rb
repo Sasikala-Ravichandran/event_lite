@@ -10,6 +10,9 @@ class User < ActiveRecord::Base
   has_many :attendances, dependent: :destroy
   has_many :events, through: :attendances
 
+  has_many :friendships, dependent: :destroy
+  has_many :friends, through: :friendships, source: :friend
+
   def full_name
     return "#{first_name} #{last_name}".strip if (first_name || last_name)
     "Anonymous"
