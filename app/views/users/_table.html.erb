@@ -1,0 +1,23 @@
+<table class="table table-striped margin_top">
+  <thead>
+    <tr><th colspan="3" class="page-header"><h2 align="center"><%= title %></h2></th></tr>
+    <tr>
+      <th>Name</th>
+      <th>Date</th>
+      <th>Time</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <% collections.each do |collect| %>
+      <% event = collect.is_a?(Attendance) ? collect.event : collect %>
+      <% if event.upcoming %>
+      <tr>
+        <td><%= event.name %></td>
+        <td><%= event.start_date.strftime("%d %b %Y") %></td>
+        <td><%= event.start_time.strftime("%I:%M %p") %></td>
+      </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

@@ -1,43 +1,22 @@
 <div>
 <%= render 'events/search' %>
 </div>
-<br>
-<br>
-<h3 align="center">Hosting Events</h3>
-<table class="table table-striped margin_top">
-  <tr>
-    <th>Name</th>
-    <th>Date</th>
-    <th>Time</th>
-  </tr>
 
-  <% @user.created_events.each do |event| %>
-    <tr>
-      <td><%= event.name %></td>
-      <td><%= event.start_date.strftime("%d %b %Y") %></td>
-      <td><%= event.start_time.strftime("%I:%M %p") %></td>
-    </tr>
-  <% end %>
-</table>
+<% if @user.created_events.size > 0 %>
+  <%= render 'table', collections: @user.created_events, title: "Hosting_events"%>
+<% else %>
+  <div class='row col-md-10 col-md-offset-1'>
+    <p class="lead">You are not hosting any event yet. Please do host some and have fun!</p>
+  </div>
+<% end %>
 <br>
+
 <% collection_attend = current_user.attend %>
 
-<h3 align="center">Attending Events</h3>
-<table class="table table-striped margin_top">
-  <tr>
-    <th>Name</th>
-    <th>Date</th>
-    <th>Time</th>
-  </tr>
-  
-  <% collection_attend.each do |attendance| %>
-    <% event = attendance.event %>
-    <% if event.upcoming %>
-      <tr>
-        <td><%= event.name %></td>
-        <td><%= event.start_date.strftime("%d %b %Y") %></td>
-        <td><%= event.start_time.strftime("%I:%M %p") %></td>
-      </tr>
-    <% end %>
-  <% end %>
-</table>
+<% if collection_attend.size > 0 %>
+  <%= render 'table', collections: collection_attend, title: "Attending_events"%>
+<%else%>
+  <div class='row col-md-10 col-md-offset-1'>
+    <p class="lead">You are not attending any event yet and missing fun. Please do join events and enjoy with your friends and family!</p>
+  </div>
+<%end%>
