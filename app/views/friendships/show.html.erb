@@ -1,5 +1,3 @@
-<%= render 'friendship/lookup' %>
-
 <% if @friendships.size > 0 %>
   <table class="table table-striped">
     <thead>
@@ -18,17 +16,17 @@
           <td><%= friend.full_name %></td>
           <td><%= friend.email %></td>
           <td>
-            <%= link_to "View Profile", user_path(friend), class: "btn btn-primary btn-xs" %>
+            <%= link_to "View Profile", user_path(friend), class: "btn btn-info" %>
             <%= link_to "Remove Friend", friendship_path(friend), :method => :delete, 
                                   :data => { :confirm => 'Are you sure?' },
-                                  :class => 'btn btn-xs btn-danger' %>
+                                  :class => 'btn btn-danger' %>
           </td>
         </tr>
       <% end %>
     </tbody>
   </table>
 <% else %>
-  <div class='row col-md-12'>
+  <div class='well row col-md-12'>
     <p class="lead">You don't have any friends yet. Please add some!</p>
   </div>
 <% end %>

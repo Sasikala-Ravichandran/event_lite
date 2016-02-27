@@ -30,6 +30,5 @@ RSpec.describe "Attending an event" do
     expect(page).to have_link("View")
     expect(page).to have_link("Attend")
   end
-
-
+  
 end
