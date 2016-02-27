@@ -5,7 +5,7 @@
     <% if user_signed_in? %>
       <%= link_to "Signout", destroy_user_session_path, method: :delete %>
     <% else %>
-    <%= link_to "Sign up now!", new_user_registration_path, class: "btn btn-lg btn-info" %>
+      <%= link_to "Sign up now!", new_user_registration_path, class: "btn btn-lg btn-info" %>
     <% end %>
   </div>
 </div>
