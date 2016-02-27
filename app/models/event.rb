@@ -8,6 +8,10 @@ class Event < ActiveRecord::Base
   has_many :attendances, dependent: :destroy
   has_many :users, through: :attendances
 
+  scope :oncoming, -> { where('start_date >=?', Date.today) }
+  scope :past, -> { where('start_date < ?', Date.today) }
+
+
   def self.search_events(name)
     where("name LIKE ?", "%#{name}%")
   end
