@@ -6,15 +6,24 @@ FactoryGirl.define do
     password { Faker::Internet.password }
   
     transient do
-      events_count 5
+      count 5
     end
 
     factory :user_with_attending_events do
       after(:create) do |user, evaluator|
-        (0...evaluator.events_count).each do |i|
+        (0...evaluator.count).each do |i|
           user.events << FactoryGirl.create(:event)
         end
       end
     end
+
+    factory :user_with_friends do
+      after(:create) do |user, evaluator|
+        (0...evaluator.count).each do |i|
+          user.friends << FactoryGirl.create(:friend)
+        end
+      end
+    end
+
   end  
 end

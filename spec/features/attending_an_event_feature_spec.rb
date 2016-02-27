@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "Attending an event" do
 
   let!(:event) { create(:event, name: "Women who code") }
-  let!(:user) { create(:user_with_attending_events, events_count: 3) }
+  let!(:user) { create(:user_with_attending_events, count: 3) }
 
   def visit_my_page 
     login_as(user)
