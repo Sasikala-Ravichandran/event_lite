@@ -22,7 +22,7 @@ RSpec.describe FriendshipsController, type: :controller do
       end
 
       it "displays the flash message" do
-        expect(flash[:success]).to eq("You are send a request to a friend")
+        expect(flash[:success]).to eq("You sent a request to a friend")
       end
 
       it "redirects_to profile page" do

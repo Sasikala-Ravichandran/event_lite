@@ -5,7 +5,7 @@ class FriendshipsController < ApplicationController
   def create
     @friendship = Friendship.new(user_id: params[:user], friend_id: params[:friend])
     if @friendship.save
-      flash[:success] = "You are send a request to a friend"
+      flash[:success] = "You sent a request to a friend"
     else
       flash[:danger] = "You are not allowed to make a friend"
     end
