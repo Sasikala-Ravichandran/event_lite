@@ -20,14 +20,13 @@
     <% collection_attend.each do |attendance| %>
       <% event = attendance.event %>
       <% if event.upcoming %>
-        <div class="row margin_bottom">
+        <div class="row margin_bottom" id= "attend_events">
           <div class="col-md-6">
             <%= link_to event.name, event %>
           </div>
           <div class="col-md-4">
             <%= link_to "View", event, class: 'btn btn-info'%>
-            <%= link_to "Decline", attendance_path(attendance), method: :delete,
-                                 data: { confirm: "Don't want to attend this event?"},class: 'btn btn-danger' %>            
+            <%= link_to "Decline", attendance_path(attendance), method: :delete, data: { confirm: "Don't want to attend this event?"}, class: 'btn btn-danger'%>            
           </div>
         </div>
       <% end %>

@@ -6,11 +6,17 @@ class AttendancesController < ApplicationController
     @attendance = Attendance.new(user_id: params[:user], event_id: params[:event])
     @attendance.accepted = true
     if @attendance.save
-      flash[:success] = "You are attending the event"
+      respond_to do |format|
+        format.html do 
+          redirect_to current_user
+          flash[:success] = "You are attending the event"
+        end
+        format.js
+      end
     else
       flash[:danger] = "You are not allowed to attend the event"
+      redirect_to current_user
     end
-    redirect_to current_user
   end
   
   def destroy
@@ -25,11 +31,17 @@ class AttendancesController < ApplicationController
     if !@attendance.accepted?
       @attendance.toggle(:accepted)
       @attendance.save 
-      flash[:success] = "You are attending the event"
+      respond_to do |format|
+        format.html do 
+          redirect_to events_path
+          flash[:success] = "You are attending the event"
+        end
+        format.js
+      end
     else
-      flash[:success] = "You are already attending the event"
+      flash[:danger] = "You are already attending the event"
+      redirect_to events_path
     end
-    redirect_to events_path
   end
 
 end

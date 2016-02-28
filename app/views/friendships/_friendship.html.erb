@@ -1,0 +1,14 @@
+<tbody>
+  <% @friend = @friendship.friend if @friendship %>
+  <% @friend = @friendship.user if current_user == @friend %>
+  <tr>
+    <td><%= @friend.full_name %></td>
+    <td><%= @friend.email %></td>
+    <td>
+      <%= link_to "View", user_path(@friend), class: "btn btn-info" %>
+      <% if !@friendship.verified %>
+        <p class="btn btn-warning"> Friend Request Sent</p>
+      <% end %>
+    </td>
+  </tr>
+</tbody>

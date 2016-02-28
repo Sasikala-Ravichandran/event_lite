@@ -1,0 +1,10 @@
+<tbody>
+<% @event = @attendance.event if @attendance %>
+<% if @event.upcoming %>
+  <tr>
+    <td><%= @event.name %></td>
+    <td><%= @event.start_date.strftime("%d %b %Y") %></td>
+    <td><%= @event.start_time.strftime("%I:%M %p") %></td>
+  </tr>
+<% end %>
+</tbody>

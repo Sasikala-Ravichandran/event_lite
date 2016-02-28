@@ -5,11 +5,17 @@ class FriendshipsController < ApplicationController
   def create
     @friendship = Friendship.new(user_id: params[:user], friend_id: params[:friend])
     if @friendship.save
-      flash[:success] = "You sent a request to a friend"
+      respond_to do |format|
+        format.html do
+          flash[:success] = "You sent a request to a friend"
+          redirect_to friendship_path(current_user)
+        end
+        format.js
+      end
     else
       flash[:danger] = "You are not allowed to make a friend"
+      redirect_to friendship_path(current_user)
     end
-    redirect_to friendship_path(current_user)
   end
 
   def accept
@@ -17,18 +23,29 @@ class FriendshipsController < ApplicationController
     if !@friendship.verified?
       @friendship.toggle(:verified)
       @friendship.save 
-      flash[:success] = "You accepted the request"
+      respond_to do |format|
+        format.html do 
+          flash[:success] = "You accepted the request"
+          redirect_to friendship_path(current_user)
+        end
+        format.js
+      end
     else
       flash[:danger] = "You rejected the request"
+      redirect_to friendship_path(current_user)
     end
-    redirect_to friendship_path(current_user)
   end
 
   def destroy
     @friendship = Friendship.find(params[:id])
     @friendship.destroy
-    flash[:success] = "You rejected the request"
-    redirect_to friendship_path(current_user)
+    respond_to do |format|
+      format.html do 
+        flash[:success] = "You rejected the request"
+        redirect_to friendship_path(current_user)
+      end
+      format.js
+    end
   end
 
   def show

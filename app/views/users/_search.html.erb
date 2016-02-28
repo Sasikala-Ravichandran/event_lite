@@ -27,9 +27,9 @@
                 <%= link_to "View", user, class: 'btn btn-info'%>     
                 <% unless current_user == user %>
                   <% if Friendship.not_yet_friends(current_user.id, user.id) %>
-                    <%= link_to "Request", friendships_path(user: current_user, friend: user), method: :post, class: 'btn btn-warning' %>
+                    <%= link_to "Request", friendships_path(user: current_user, friend: user), method: :post, remote: true, class: 'btn btn-warning' %>
                   <% elsif Friendship.requested_but_not_accepted(current_user.id, user.id) %>
-                    <%= link_to "Accept", accept_attendance_path(id: Friendship.find_by_user_friend(current_user, user)), method: :post, class: 'btn btn-success' %>
+                    <%= link_to "Accept", accept_friendship_path(id: Friendship.find_by_user_friend(current_user, user)), method: :post, remote: true, class: 'btn btn-success' %>
                   <% else %>
                     <p class='btn btn-warning label label-primary'>You are friends</p>
                   <% end %>

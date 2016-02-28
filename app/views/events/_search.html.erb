@@ -23,9 +23,9 @@
         <div class="col-md-4 margin_bottom">
           <% unless current_user == event.creator %>
             <% if Attendance.not_yet_invited(current_user, event) %>
-              <%= link_to "Attend", attendances_path(user: current_user, event: event), method: :post, class: 'btn btn-warning' %>
+              <%= link_to "Attend", attendances_path(user: current_user, event: event), method: :post, remote: true, class: 'btn btn-warning' %>
             <% elsif Attendance.invited_but_not_accepted(current_user, event) %>
-              <%= link_to "Accept", accept_attendance_path(id: Attendance.find_by_user_event(current_user, event)), method: :post, class: 'btn btn-success' %>
+              <%= link_to "Accept", accept_attendance_path(id: Attendance.find_by_user_event(current_user, event)), method: :post, remote: true, class: 'btn btn-success' %>
             <% end %>
           <% end %>
           <%= link_to "View", event, class: 'btn btn-info'%>
