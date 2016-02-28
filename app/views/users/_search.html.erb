@@ -1,0 +1,45 @@
+<div id="friend_search">
+  <%= form_tag search_users_path, remote: true, id: "friend_search_form" do %>
+    <div class="form-group row no-padding text_center col-md-12">
+      <div class="col-md-offset-2 col-md-6 no-padding">
+        <%= text_field_tag :search_friend, params[:search_friend], 
+                            placeholder: "First name or Last name or Email id",
+                            class: 'form-control search-box input-lg'%>
+      </div>
+      <div class="col-md-2 no-padding">
+        <%= button_tag(type: :submit, class: "btn btn-lg btn-info") do %>
+          <i class="fa fa-search"></i> Look up a friend
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <%= render 'common/spinner' %>
+  <%if !@users.blank? %>
+    <div id="friend_search_results" class="well row results_block">
+      <table class="search_result_table col-md-12">
+        <tbody>
+          <% @users.each do |user| %>
+            <tr>
+              <td><strong>Name:</strong><%= user.full_name %></td>
+              <td><strong>Email:</strong><%= user.email %></td>
+              <td>
+                <%= link_to "View", user, class: 'btn btn-info'%>     
+                <% unless current_user == user %>
+                  <% if Friendship.not_yet_friends(current_user.id, user.id) %>
+                    <%= link_to "Request", friendships_path(user: current_user, friend: user), method: :post, class: 'btn btn-warning' %>
+                  <% elsif Friendship.requested_but_not_accepted(current_user.id, user.id) %>
+                    <%= link_to "Accept", accept_attendance_path(id: Friendship.find_by_user_friend(current_user, user)), method: :post, class: 'btn btn-success' %>
+                  <% else %>
+                    <p class='btn btn-warning label label-primary'>You are friends</p>
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+  <div id="friend_search_errors"></div>
+</div>
