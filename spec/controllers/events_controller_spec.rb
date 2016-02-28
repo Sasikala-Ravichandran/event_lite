@@ -33,7 +33,12 @@ RSpec.describe EventsController, type: :controller do
   describe "POST #create" do
 
     context "a successful create" do
-      before { post :create, event: FactoryGirl.attributes_for(:event, creator_id: creator.id) }
+      
+      before do 
+        post :create, event: FactoryGirl.attributes_for(:event, creator_id: creator.id),
+                      users: { id: [1,2,3] }
+      end
+        
       it "saves an event object in database" do
         expect(Event.count).to eq(1)
       end
@@ -50,7 +55,11 @@ RSpec.describe EventsController, type: :controller do
 
     context "an unsuccessful create" do
 
-      before { post :create, event: FactoryGirl.attributes_for(:event, name: " ", creator_id: creator) }
+      before do 
+        post :create, event: FactoryGirl.attributes_for(:event, name: " ", creator_id: creator),
+                      users: { id: [1,2,3] }
+      end
+         
       it "does not save an event object in database" do
         expect(Event.count).to eq(0)
       end

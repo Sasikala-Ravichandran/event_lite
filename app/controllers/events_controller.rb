@@ -13,10 +13,18 @@ class EventsController < ApplicationController
 
   def new
     @event = current_user.created_events.build
+    @attendance = @event.attendances.build
+    @friends = current_user.friends + current_user.rev_friends
   end
 
   def create
     @event = current_user.created_events.build(event_params)
+    params[:users][:id].each do |user|
+      unless user.empty?
+        attendance = @event.attendances.build(user_id: user)
+        attendance.save
+      end
+    end
     if @event.save
       flash[:success] = "Event has been created"
       redirect_to @event

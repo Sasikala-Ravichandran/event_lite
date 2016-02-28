@@ -41,6 +41,13 @@
     </div>
   </div>
 
+  <div class="form-group">
+    <%= fields_for(@attendance) do |at| %>
+      <%= at.label "Invite Your Pals:" %><br/>
+      <%= collection_select(:users, :id, @friends, :id, :full_name, {},{ multiple: true })%>
+    <% end %> 
+  </div>
+
   <div class="action">
     <%=f.submit class: "btn btn-info margin_bottom" %>
   </div>
