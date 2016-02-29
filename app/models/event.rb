@@ -13,9 +13,9 @@ class Event < ActiveRecord::Base
 
 
   def self.search_events(param)
-    #param.strip!
+    param.strip!
     param.downcase!
-    where("name LIKE ?", "%#{param}%")
+    where("lower(#{name}) like ?", "%#{param}%")
   end
 
   def upcoming
