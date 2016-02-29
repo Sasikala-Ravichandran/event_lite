@@ -1,9 +1,10 @@
 <div class="col-md-12" align="center">
+<marquee scrolldelay="5"> Hi There! Welcome to Event Lite App. If you wish to login as an existing user to see functionality of the app, use email as "admin@admin.com" and password as "password" </marquee>
   <div class="center jumbotron">
     <h2>Welcome to EVENT LITE</h2>
-    <h4>for the meeting friends and families on special occasions</h4>
+    <h4>for managing your events which allows you to meet friends and families.</h4>
     <% if user_signed_in? %>
-      <%= link_to "Signout", destroy_user_session_path, method: :delete %>
+      <%= link_to "Signout", destroy_user_session_path, method: :delete, class: "btn btn-lg btn-info" %>
     <% else %>
       <%= link_to "Sign up now!", new_user_registration_path, class: "btn btn-lg btn-info" %>
     <% end %>
