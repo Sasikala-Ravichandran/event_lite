@@ -12,8 +12,10 @@ class Event < ActiveRecord::Base
   scope :past, -> { where('start_date < ?', Date.today) }
 
 
-  def self.search_events(name)
-    where("name LIKE ?", "%#{name}%")
+  def self.search_events(param)
+    param.strip!
+    param.downcase!
+    where("name LIKE ?", "%#{param}%")
   end
 
   def upcoming
