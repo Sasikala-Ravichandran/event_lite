@@ -1,9 +1,0 @@
-== Event_Lite  
-
-  App to invite friends for event. 
-
-Gems used in this app:
-
-* Devise for user authentication
-
-Demo[] 
