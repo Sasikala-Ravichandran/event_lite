@@ -4,7 +4,7 @@ Event lite is a 'Event Management System' which allows user to let know his frie
 
 User's Event Page displays hosted events, hosting events, attended events, attending events, invited events. A user can view his friend's event page which shows events the friend is attending and hosting.
 
-Even Lite is live [here](https://event-lite.herokuapp.com/).
+Even Lite is live [here](https://job-application-tracker.herokuapp.com/).
 
 Features of the app:
 
