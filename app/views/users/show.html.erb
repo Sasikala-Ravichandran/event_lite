@@ -13,9 +13,9 @@
   </div>
 <% end %>
 
-<% collection_attend = current_user.attend %>
+<% collection_attend = @user.attend %>
 
-<% if current_user.events.oncoming.size > 0 %>
+<% if @user.events.oncoming.size > 0 %>
   <%= render 'table', collections: collection_attend, title: "Attending_events", id: "attending_table"%>
 <%else%>
   <div class='row well col-md-10 col-md-offset-1'>

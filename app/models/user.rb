@@ -13,7 +13,8 @@ class User < ActiveRecord::Base
   has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships, source: :friend
 
-  has_many :rev_friendships, class_name: "Friendship", foreign_key: "friend_id"
+  has_many :rev_friendships, class_name: "Friendship", 
+                            foreign_key: "friend_id", dependent: :destroy
   has_many :rev_friends, through: :rev_friendships, source: :user
 
   def self.search_friend(param)
